@@ -2,14 +2,27 @@
 {% load static %}
 {{ user_get_full_name }}
 
-<button class="follow-button" >
+{% if request.user == user %}
+    <button class="follow-button" disabled >
     {% if request.user in user.followers.all %}
         <span >UnFollow</span>
     {% else %}
         <span >follow</span>
     {% endif %}
-     
-</button>
+    </button>
+{% else %}
+    <button class="follow-button" >
+    {% if request.user in user.followers.all %}
+        <span >UnFollow</span>
+    {% else %}
+        <span >follow</span>
+    {% endif %}
+    </button>
+{% endif %} 
+
+
+
+
 
 {% if user.photo %}
     <a href="{{ user.photo.url }}">
