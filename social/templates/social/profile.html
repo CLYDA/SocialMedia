@@ -1,0 +1,25 @@
+{% load thumbnail %}
+{% load static %}
+{% with user=request.user %}
+{% endwith %}
+
+<p> {{ user.get_full_name }} </p>
+
+{% if user.photo %}
+    <a href="{{ user.photo.url }}">
+        <img src="{% thumbnail user.photo 200x0 quality=80 %}" >
+    </a>
+{% else %}
+    <img src="{% static '/images/profile/default_user.jpeg' %}" style="width: 200px;" >
+{% endif %}    
+ 
+<ul>
+    {% for post in saved_posts %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">
+                {{ post.description|truncatewords:10|linebreaks }}
+            </a>
+            <span>publish at {{ post.created}} by {{ post.author}}</span>
+        </li>
+    {% endfor %}    
+</ul>

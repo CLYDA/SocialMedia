@@ -1,0 +1,138 @@
+{% comment %} {% load thumbnail %}
+{% load static %}
+{{ user.get_full_name }}
+
+<button class="follow-button">
+    {% if request.user in user.followers.all %}
+        <span>UnFollow</span>
+    {% else %}
+        <span>Follow</span>
+    {% endif %}
+</button>
+
+
+<img src="{% static 'images/profile/default_user.jpeg' %}" style="width: 200px;">
+
+<p>Bio: {{ user.bio }}</p>
+<p>Job: {{ user.job }}</p>
+<p>Date_of_birth: {{ user.date_of_birth }}</p>
+
+{% with total_followers=user.followers.count total_followings=user.following.count %}
+    <span class="followers_count">{{ total_followers }} follower{{ total_followers|pluralize }}</span>
+    <span class="following_count">{{ total_followings }} following{{ total_followings|pluralize }}</span>
+{% endwith %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.follow-button').click(function() {
+        var button = $(this);
+        $.ajax({
+            type: 'POST',
+            url: '{% url "social:user_follow" %}',
+            data: {
+                'id': '{{ user.id }}',
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(data) {
+                if (data.follow) {
+                    button.text('UnFollow');
+                } else {
+                    button.text('Follow');
+                }
+                $('.followers_count').text(data.followers_count + ' follower' + (data.followers_count == 1 ? '' : 's'));
+                $('.following_count').text(data.followings_count + ' following' + (data.followings_count == 1 ? '' : 's'));
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+ {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% load thumbnail %}
+{% load static %}
+{{ user_get_full_name }}
+
+<button class="follow-button" >
+    {% if request.user in user.followers.all %}
+        <span >UnFollow</span>
+    {% else %}
+        <span >follow</span>
+    {% endif %}
+     
+</button>
+
+{% if user.photo %}
+    <a href="{{ user.photo.url }}">
+        <img src="{% thumbnail user.photo 200x0 quality=80 %}" >
+    </a>
+{% else %}
+    <img src="{% static '/images/profile/default_user.jpeg' %}" style="width: 200px;" >
+{% endif %}     
+    <p>Bio: {{ user.bio }} </p>
+    <p>Job: {{ user.job }} </p>
+    <p>Date_of_birth: {{ user.date_of_birth }} </p>
+
+{% with total_followers=user.followers.count total_followings=user.following.count %}
+    <span class="followers_count" > {{ total_followers }} follower {{ followers|pluralize }} </span> 
+    <span class="following_count" > {{ total_followings }} following {{ followings|pluralize }} </span>
+    
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('.follow-button').click(function() {
+        var button = $(this);
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'social:user_follow' %}',
+            data: {
+                'id': '{{ user.id }}', 
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(data) {
+                if (data.follow) {
+                    button.text('UnFollow');
+                } else {
+                    button.text('Follow');
+                }
+                $('.followers_count').text(data.followers_count + ' follower' + (data.followers_count == 1 ? '' : 's'));
+                $('.following_count').text(data.followings_count + ' following' + (data.followings_count == 1 ? '' : 's'));
+            },
+        });
+    });
+});
+</script> 
+{% endwith %}
+
+{% comment %} $('.followers_count ').text(data.followers_count + Follower{{ total_followers|pluralize }});
+$('.following_count').text(data.followings_count + Following{{ total_followings|pluralize }}); {% endcomment %}

@@ -1,0 +1,55 @@
+{% extends "parent/base.html" %}
+{% load static %}
+
+{% block title %}ویرایش حساب کاربری{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/edit_account.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/fix-section-titles.css' %}">
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/date_field.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'social:password_reset' %}">فراموشی رمز</a>
+
+
+<div class="edit-account-container">
+    <h2 class="form-title">ویرایش اطلاعات حساب کاربری</h2>
+    
+        <form method="post" enctype="multipart/form-data" class="edit-account-form">
+        {% csrf_token %}
+        
+        <div class="form-section no-number">
+            <h3>اطلاعات شخصی</h3>
+            {{ user_form.as_p }}
+        </div>
+        
+        <div class="form-section no-number">
+            <h3>اطلاعات پروفایل</h3>
+            
+            
+            <!-- نمایش دستی فیلدهای فرم با کنترل بیشتر -->
+
+            
+
+            
+         
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn-save">
+                <i class="fas fa-save"></i>
+                ذخیره تغییرات
+            </button>
+
+        </div>
+    </form>
+</div>
+{% endblock %}
