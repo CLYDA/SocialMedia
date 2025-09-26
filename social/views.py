@@ -201,7 +201,8 @@ def log_out(request):
     return HttpResponse("your exit from your page")
 
 def profile(request):
-    user = request.user
+    # user = request.user
+    user = User.objects.prefetch_related('followers').get(id=request.user.id)
     saved_posts = user.saved_posts.all()
     return render(request, 'social/profile.html', {'saved_posts':saved_posts})
 
