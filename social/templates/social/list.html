@@ -34,7 +34,7 @@
         $('#load-more').click(function() {
             $.ajax({
                 type: 'GET',
-                url: "{% if tag %} {% url 'social:post_list_by_tag' tag.slug %} {% else %} {% url 'social:post_list' %}{% endif %}" + "?page=" +  page,
+                url: "{% if tag %}{% url 'social:post_list_by_tag' tag.slug %}{% else %}{% url 'social:post_list' %}{% endif %}" + "?page=" + page,
                dataType: 'html',
                 success: function(data) {
                     $('#post-list').append(data);
@@ -47,11 +47,3 @@
     });
 </script>
 
-{% comment %} success: function(data) {
-                    if ($.trim(data) == '') {
-                        $('#load-more').prop('disabled', true).text('پستی وجود ندارد');
-                    } else {
-                        $('#post-list').append(data);
-                        page += 1;
-                    }
-                } {% endcomment %}
