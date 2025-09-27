@@ -149,7 +149,7 @@ def create_post(request):
 
     
 def post_list(request,tag_slug=None):
-    posts = Post.objects.select_related('author').all()
+    posts = Post.objects.select_related('author').order_by('-total_likes')
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -202,7 +202,7 @@ def log_out(request):
 
 def profile(request):
     # user = request.user
-    user = User.objects.prefetch_related('followers').get(id=request.user.id)
+    user = User.objects.prefetch_related('followers','following').get(id=request.user.id)
     saved_posts = user.saved_posts.all()
     return render(request, 'social/profile.html', {'saved_posts':saved_posts})
 
