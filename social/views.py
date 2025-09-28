@@ -11,6 +11,7 @@ from taggit.models import Tag
 from django.db.models import Count
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+from django.contrib import messages
 
 
 
@@ -176,7 +177,7 @@ def post_list(request,tag_slug=None):
 
 @login_required
 def ticket(request):
-    sent = False
+
     if request.method == "POST":
         form = TicketForm(request.POST)
         if form.is_valid():
@@ -189,10 +190,11 @@ def ticket(request):
                 ['arianzafari2019@gmail.com'],
                 fail_silently=False,
             )
-            sent = True
+            messages.success(request, 'Your message has been sent successfully.')
+
     else:
         form = TicketForm()
-    return render(request, "forms/ticket.html", {'form': form, 'sent': sent})    
+    return render(request, "forms/ticket.html", {'form': form})    
 
 
 

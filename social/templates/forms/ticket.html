@@ -3,10 +3,31 @@
 {% block content %}
 
 
-{% if sent %}
+{% if messages %}
 
-        تیکت شما با موفقیت ارسال شد. ما به زودی با شما تماس خواهیم گرفت.
-
+    <div class="messages">
+        <ul>
+            {% for message in messages %}
+                <li style="
+                    padding: 10px;
+                    margin-bottom: 8px;
+                    border-radius: 5px;
+                    color: #fff;
+                    background-color:
+                        {% if 'success' in message.tags %} #4caf50
+                        {% elif 'error' in message.tags %} #f44336
+                        {% elif 'warning' in message.tags %} #ff9800
+                        {% else %} #2196f3
+                        {% endif %}
+                    ;
+                    font-weight: bold;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+                ">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div> 
 
 {% endif %}
 
