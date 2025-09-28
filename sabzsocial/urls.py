@@ -6,7 +6,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('social.urls', namespace='social')),  # Include the social app URLs
-    
+    path('', include('social.urls', namespace='social')),
+    path('__debug__/', include("debug_toolbar.urls")),
 ]
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
