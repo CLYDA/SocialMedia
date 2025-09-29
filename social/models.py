@@ -27,7 +27,7 @@ class Post(models.Model):
     saved_by = models.ManyToManyField(User, related_name='saved_posts')
     tags = TaggableManager()
     total_likes = models.PositiveIntegerField(default=0)
-    
+    active = models.BooleanField(default=True )
 
     class Meta:
         ordering = ['-created']
