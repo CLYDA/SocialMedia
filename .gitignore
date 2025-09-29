@@ -1,3 +1,7 @@
+*/migrations/
+*/migrations/*
+
+
 
 *.log
 *.pot
