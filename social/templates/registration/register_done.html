@@ -1,16 +1,4 @@
-{% extends "parent/base.html" %}
-{% block title %} helloooooooo {% endblock %}
 
-
-{% block content %}
-
-
-
-
-
-    {{ user }}
-
-
-
-
-{% endblock %}
+<h1>{{ user }} عزیز </h1>
+<p>ثبت نام شما با موفقیت انجام شد</p>
+    <a href="{% url 'social:login' %}"> ورود به وبسایت</a>
