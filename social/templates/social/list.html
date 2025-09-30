@@ -89,7 +89,11 @@
 							</div>
 							<div class="explore-body">
 								<div class="">
-                                    <img class="img-circle" src="{{ post.author.photo.url}}" alt="user">
+                                    {% if post.author.photo %}
+                                        <img class="img-circle" src="{{ post.author.photo.url }}" alt="user">
+                                    {% else %}
+                                        <img class="img-circle" src="{% static 'images/profile/Avatar.png' %}" alt="user">
+                                    {% endif %}
                                 </div>
 							</div>
 

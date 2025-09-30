@@ -70,7 +70,13 @@
 				<div class="col-lg-12">
 					<div class="post-content">
 						<div class="author-post text-center">
-							<a href="#"><img class="img-fluid img-circle" src="{{ user.photo.url}}" alt="Image"></a>
+							<a href="#">
+                                {% if user.photo %}
+                                    <img class="img-fluid img-circle" src="{{ user.photo.url }}" alt="Image">
+                                {% else %}
+                                    <img class="img-fluid img-circle" src="{% static 'images/profile/Avatar.png' %}" alt="Image">
+                                {% endif %}
+							</a>
 						</div><!-- /author -->
 					</div><!-- /.post-content -->
 				</div><!-- /col-sm-12 -->

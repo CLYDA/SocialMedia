@@ -16,8 +16,12 @@
                 {% for user in users %}
 					<div class="followers-body">
                     <a href="{% url 'social:user_detail' user.username %}">
-                        <img class="img-responsive img-circle" src="{{ user.photo.url }}" alt="">
-                    </a>
+						{% if user.photo %}
+							<img class="img-responsive img-circle" src="{{ user.photo.url }}" alt="">
+						{% else %}
+							<img class="img-responsive img-circle" src="{% static 'images/profile/default_user.jpeg' %}" alt="">
+						{% endif %}
+					</a>
 				 <div class="name-box">
 				  <h4>{{ user.get_full_name}}</h4>
 				  <span>{{ user.username }}</span>
@@ -26,8 +30,11 @@
                     <li class="list-group-item full-width">
 					 <div class="pull-right" style="margin-left: 20px;">
                          {% for follower in user.followers.all|slice:"0:4" %}
-                          <img src="{{ follower.photo.url}}" alt="" class="img-circle
-                      </a> max-w-40 ">
+                            {% if follower.photo %}
+                                <img src="{{ follower.photo.url }}" alt="" class="img-circle max-w-40 ">
+                            {% else %}
+                                <img src="{% static 'images/profile/default_user.jpeg' %}" alt="" class="img-circle max-w-40 ">
+                            {% endif %}
                          {% endfor %}
                      <a href="{% url 'social:user_contact' user.username 'followers' %}">
 					  <button class="btn btn-add-gray">
@@ -40,8 +47,12 @@
                     <li class="list-group-item full-width">
 					 <div class="pull-right">
                          {% for following in user.following.all|slice:"0:4" %}
-					  <img src="{{ following.photo.url }}" alt="" class="img-circle max-w-40 ">
-						{% endfor %}
+                            {% if following.photo %}
+                                <img src="{{ following.photo.url }}" alt="" class="img-circle max-w-40 ">
+                            {% else %}
+                                <img src="{% static 'images/profile/default_user.jpeg' %}" alt="" class="img-circle max-w-40 ">
+                            {% endif %}
+                         {% endfor %}
 					  <a href="{% url 'social:user_contact' user.username 'following' %}">
 					  <button class="btn btn-add-gray">
                               <i class="fa fa-plus"></i>
