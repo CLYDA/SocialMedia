@@ -15,6 +15,10 @@ from django.contrib import messages
 
 # Create your views here.
 
+def message(request):
+    return HttpResponse("not complete yet!")
+
+
 
 def log_out(request):
     logout(request)
