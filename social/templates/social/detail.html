@@ -42,8 +42,13 @@
 {#										</button>#}
 										<!--/ button -->
 										<div class="img-poster clearfix">
-											<a href="#"><img class="img-responsive img-circle"
-													src="{{ post.author.photo.url}}" alt="Image" /></a>
+                                            <a href="#">
+                                                {% if post.author.photo %}
+                                                    <img class="img-responsive img-circle" src="{{ post.author.photo.url }}" alt="Image" />
+                                                {% else %}
+                                                    <img class="img-responsive img-circle" src="{% static 'images/profile/Avatar.png' %}" alt="Image" />
+                                                {% endif %}
+                                            </a>
                                             <span>{{ post.created|date:"Y/m/d-H:i"}}</span><br />
 											<strong><a href="#">{{ post.author.get_full_name }}</a></strong>
 											<button id="save-post" class="kafe-btn kafe-btn-danger-small">
