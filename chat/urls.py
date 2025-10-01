@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import *
+from . import views
 
 app_name = 'chat'
 
 urlpatterns = [
-    path('<str:username>/', chat_view, name='chat_view'),
+    path('<str:username>/', views.chat_view, name='chat_view'),
 ]
