@@ -30,14 +30,6 @@ def profile(request):
     my_posts = user.user_posts.all()[:8]
     following = user.get_followings()
     followers = user.get_followers()
-    conntext = {
-        'saved_posts': saved_posts,
-        'my_posts': my_posts,
-        'user': user,
-        'following': following,
-        'followers': followers,
-        'form': CommentForm()
-    }
     return render(request, 'social/profile.html', {
         'saved_posts': saved_posts,
         'my_posts': my_posts,
