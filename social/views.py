@@ -38,7 +38,15 @@ def profile(request):
         'followers': followers,
         'form': CommentForm()
     }
-    return render(request, 'social/profile.html', conntext)
+    return render(request, 'social/profile.html', {
+        'saved_posts': saved_posts,
+        'my_posts': my_posts,
+        'user': user,
+        'following': following,
+        'followers': followers,
+        'form': CommentForm(),
+        'active_page': 'profile',  
+    })
 
 
 def register(request):
@@ -106,6 +114,7 @@ def post_list(request, tag_slug=None):
         'posts': posts,
         'tag': tag,
         'latest_users': latest_users,
+        'active_page': 'home',
     }
     return render(request, "social/list.html", context)
 
@@ -124,7 +133,7 @@ def create_post(request):
             return redirect('social:profile')
     else:
         form = CreatePostForm()
-    return render(request, 'forms/create-post.html', {'form': form})
+    return render(request, 'forms/create-post.html', {'form': form, 'active_page': 'create_post'})
 
 
 def post_detail(request, pk):
@@ -187,8 +196,11 @@ def save_post(request):
 
 @login_required
 def user_list(request):
-    users = User.objects.filter(is_active=True)
-    return render(request, 'user/user_list.html', {'users': users})
+    users = User.objects.all()
+    return render(request, 'user/user_list.html', {
+        'users': users,
+        'active_page': 'user_list',  # این خط را اضافه کن
+    })
 
 
 @login_required

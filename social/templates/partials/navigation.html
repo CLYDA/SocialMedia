@@ -8,27 +8,27 @@
 	 =============================================== -->
 	<section class="nav-sec">
 		<div class="d-flex justify-content-between">
-			<div class="p-2 nav-icon-lg dark-black">
+			<div class="p-2 nav-icon-lg {% if active_page == 'home' %}mint-green{% else %}dark-black{% endif %}">
 				<a class="nav-icon" href="{% url 'social:post_list' %}"><em class="fa fa-home"></em>
 					<span>خانه</span>
 				</a>
 			</div>
-			<div class="p-2 nav-icon-lg clean-black">
+			<div class="p-2 nav-icon-lg {% if active_page == 'messages' %}mint-green{% else %}clean-black{% endif %}">
 				<a class="nav-icon" href="{% url 'social:post_list' %}"><em class="fa fa-list-ul"></em>
 					<span>پیام</span>
 				</a>
 			</div>
-			<div class="p-2 nav-icon-lg dark-black">
+			<div class="p-2 nav-icon-lg {% if active_page == 'create_post' %}mint-green{% else %}dark-black{% endif %}">
 				<a class="nav-icon" href="{% url 'social:create_post' %}"><em class="fab fa-instagram"></em>
 					<span>ایجاد پست</span>
 				</a>
 			</div>
-			<div class="p-2 nav-icon-lg clean-black">
+			<div class="p-2 nav-icon-lg {% if active_page == 'user_list' %}mint-green{% else %}clean-black{% endif %}">
 				<a class="nav-icon" href="{% url 'social:user_list' %}"><em class="fa fa-align-left"></em>
 					<span>کابران</span>
 				</a>
 			</div>
-			<div class="p-2 nav-icon-lg mint-green">
+			<div class="p-2 nav-icon-lg {% if active_page == 'profile' %}mint-green{% else %}dark-black{% endif %}">
 				<a class="nav-icon" href="{% url 'social:profile' %}"><em class="fa fa-user"></em>
 					<span>پروفایل</span>
 				</a>
