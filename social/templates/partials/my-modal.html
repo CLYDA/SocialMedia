@@ -67,11 +67,19 @@
 
 								<div class="modal-meta-bottom">
 									<ul>
-										<li><a class="modal-like" href="#"><i class="fa fa-heart"></i></a><span
-												class="modal-one"> {{ my_post.total_likes }}</span> |
+										<li>
+                                            <a class="modal-like {% if user in my_post.likes.all %}text-danger{% endif %}" 
+                                               href="#" data-post-id="{{ my_post.id }}">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            <span class="modal-one" id="like-count-{{ my_post.id }}"> {{ my_post.total_likes }}</span> |
 											<a class="modal-comment" href="#"><i class="fa fa-comments"></i></a><span>
 												{{ my_post.comments.count}}</span>
 										</li>
+										<!-- {% with total_followers=user.followers.count total_followings=user.following.count %}
+											<span class="followers_count">{{ total_followers }} follower{{ total_followers|pluralize }}</span>
+											<span class="following_count">{{ total_followings }} following{{ total_followings|pluralize }}</span>
+										{% endwith %} -->
 										<li>
 											<span class="thumb-xs">
 												<img class="img-responsive img-circle" src="{% static 'images/profile/avatar2.webp' %}"
@@ -108,3 +116,30 @@
 		<!--/ modal-dialog -->
 	</div>
 	<!--/ modal -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.modal-like').click(function(e) {
+        e.preventDefault();
+        var button = $(this);
+        var postId = button.data('post-id');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "social:like_post" %}',
+            data: {
+                'post_id': postId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(data) {
+                $('#like-count-' + postId).text(data.likes_count);
+                if (data.liked) {
+                    button.addClass('text-danger');
+                } else {
+                    button.removeClass('text-danger');
+                }
+            }
+        });
+    });
+});
+</script>
