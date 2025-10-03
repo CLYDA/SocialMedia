@@ -68,7 +68,7 @@
 								<div class="modal-meta-bottom">
 									<ul>
 										<li>
-                                            <a class="modal-like {% if user in my_post.likes.all %}text-danger{% endif %}" 
+                                            <a class="modal-like " 
                                                href="#" data-post-id="{{ my_post.id }}">
                                                 <i class="fa fa-heart"></i>
                                             </a>
@@ -76,10 +76,7 @@
 											<a class="modal-comment" href="#"><i class="fa fa-comments"></i></a><span>
 												{{ my_post.comments.count}}</span>
 										</li>
-										<!-- {% with total_followers=user.followers.count total_followings=user.following.count %}
-											<span class="followers_count">{{ total_followers }} follower{{ total_followers|pluralize }}</span>
-											<span class="following_count">{{ total_followings }} following{{ total_followings|pluralize }}</span>
-										{% endwith %} -->
+										
 										<li>
 											<span class="thumb-xs">
 												<img class="img-responsive img-circle" src="{% static 'images/profile/avatar2.webp' %}"
@@ -133,11 +130,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $('#like-count-' + postId).text(data.likes_count);
-                if (data.liked) {
-                    button.addClass('text-danger');
-                } else {
-                    button.removeClass('text-danger');
-                }
+                
             }
         });
     });
