@@ -1,5 +1,5 @@
 {% load static %}
-<!--/ profile -->
+
 	<div id="myModal-{{ post_id }}" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -25,13 +25,13 @@
                                         {% endfor %}
                                         </div>						</div>
                     <br>
-						<!--/ col-md-8 -->
+						
 						<div class="col-md-4 modal-meta">
 							<div class="modal-meta-top">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 									<span aria-hidden="true">×</span><span class="sr-only">بستن</span>
 								</button>
-								<!--/ button -->
+								
 								<div class="img-poster clearfix">
 									<a href="#">
                                         {% if user.photo %}
@@ -45,11 +45,11 @@
 {#									<a href="#" class="kafe kafe-btn-mint-small"><i class="fa fa-check-square"></i>#}
 {#										دنبال کردن</a>#}
 								</div>
-								<!--/ img-poster -->
+								
 
 								<ul class="img-comment-list">
                                     {% for comment in my_post.comments.all %}
-									<!--/ li -->
+									
 									<li>
 										<div class="comment-img">
 											<img src="{% static 'images/profile/avatar2.png' %}" class="img-responsive img-circle"
@@ -60,10 +60,10 @@
 											<p class="">{{ comment.body }}</p> <span class="date sub-text"> در {{ comment.created }} </span>
 										</div>
 									</li>
-									<!--/ li -->
+									
                                     {% endfor %}
 								</ul>
-								<!--/ comment-list -->
+								
 
 								<div class="modal-meta-bottom">
 									<ul>
@@ -91,34 +91,31 @@
                                                   </div>
                                                 </form>
 											</div>
-											<!--/ comment-body -->
 										</li>
 									</ul>
 								</div>
-								<!--/ modal-meta-bottom -->
+
 
 							</div>
-							<!--/ modal-meta-top -->
+
 						</div>
-						<!--/ col-md-4 -->
 
 					</div>
-					<!--/ row -->
+
 				</div>
-				<!--/ modal-body -->
+
 
 			</div>
-			<!--/ modal-content -->
+
 		</div>
-		<!--/ modal-dialog -->
+
 	</div>
-	<!--/ modal -->
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('.modal-like').click(function(e) {
-        e.preventDefault();
+    $('.modal-like').click(function() {
         var button = $(this);
         var postId = button.data('post-id');
         $.ajax({
@@ -130,9 +127,11 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $('#like-count-' + postId).text(data.likes_count);
-                
             }
         });
+    });
+    $('#myModal-{{ my_post.id }}').on('hidden.bs.modal', function () {
+        location.reload();
     });
 });
 </script>
