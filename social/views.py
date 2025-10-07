@@ -13,11 +13,19 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
 
-# Create your views here.
+
+@login_required
+def following_list(request, username):
+    user = get_object_or_404(User, username=username, is_active=True)
+    following = user.following.all()
+    return render(request, 'user/following_list.html', {
+        'user': user,
+        'following': following,
+    })
+
 
 def message(request):
     return HttpResponse("not complete yet!")
-
 
 
 def log_out(request):

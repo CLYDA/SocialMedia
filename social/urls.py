@@ -39,5 +39,7 @@ urlpatterns = [
 	path('posts/<post_id>/comment', views.post_comment, name="post_comment"),
 
 	path('message', views.message, name="message"),
+
+    path('users/<username>/following_list/', views.following_list, name='following_list'),
 ]
 

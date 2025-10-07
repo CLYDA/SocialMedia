@@ -1,0 +1,16 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}فالووینگ‌ها{% endblock %}
+{% block content %}
+<h3>فالووینگ‌های {{ user.get_full_name }}</h3>
+<ul>
+    {% for u in following %}
+        <li>
+            <img src="{% if u.photo %}{{ u.photo.url }}{% else %}{% static 'images/profile/Avatar.png' %}{% endif %}" width="40" style="border-radius:50%">
+            {{ u.get_full_name }} <span style="color:gray;">@{{ u.username }}</span>
+        </li>
+    {% empty %}
+        <li>هیچ فالووینگی وجود ندارد.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
