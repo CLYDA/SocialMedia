@@ -64,7 +64,7 @@
                    </ul>
 				  </div><!--/ followers-base -->
 			     </div><!--/ name-box -->
-				 <span><a href="#" class="kafe-btn kafe-btn-mint-small">دنبال کردن</a></span>
+				 <span><a href="#" class="kafe-btn kafe-btn-mint-small follow-btn" data-user-id="{{ user.id }}">دنبال کردن</a></span>
 				</div><!--/ followers-body -->
                 {% endfor %}
 
@@ -92,6 +92,30 @@
 			alwaysVisible: true,
 			size:"8px",
 		});
+	</script>
+	<script>
+	$(document).ready(function() {
+    $('.follow-btn').click(function(e) {
+        e.preventDefault();
+        var btn = $(this);
+        var userId = btn.data('user-id');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "social:user_follow" %}',
+            data: {
+                id: userId,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function(data) {
+                if (data.follow) {
+                    btn.text('دنبال نکردن ');
+                } else {
+                    btn.text('دنبال کردن');
+                }
+            }
+        });
+    });
+});
 	</script>
 
 {% endblock %}

@@ -224,7 +224,6 @@
     $(document).ready(function() {
         $('#follow-button').click(function() {
             var button = $(this);
-
             $.ajax({
                 type: 'POST',
                 url: '{% url 'social:user_follow' %}',
