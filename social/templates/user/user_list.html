@@ -59,23 +59,32 @@
 					  </button>
                      </a>
 					  <span> {{ user.following.count}} نفر را دنبال می کند</span>
-					 </div><!--/ pull-right -->
-                    </li><!--/ list-group-item -->
+					 </div>
+                    </li>
                    </ul>
-				  </div><!--/ followers-base -->
-			     </div><!--/ name-box -->
-				 <span><a href="#" class="kafe-btn kafe-btn-mint-small follow-btn" data-user-id="{{ user.id }}">دنبال کردن</a></span>
-				</div><!--/ followers-body -->
+				  </div>
+			     </div>
+				 	<span>
+						{% if request.user == user %}
+							<button class="kafe-btn kafe-btn-default-mint" disabled>خودت</button>
+						{% else %}
+							{% if request.user in user.followers.all %}
+								<button class="kafe-btn kafe-btn-danger follow-btn" data-user-id="{{ user.id }}">آنفالو</button>
+							{% else %}
+								<button class="kafe-btn kafe-btn-mint follow-btn" data-user-id="{{ user.id }}">فالو</button>
+							{% endif %}
+						{% endif %}
+					</span>
+				</div>
                 {% endfor %}
-
-			</div><!--suggestions-list end-->
+			</div>
 		</div>
 
 		</div>
 
-       </div><!--/ row-->
-	  </div><!--/ container -->
-	 </section><!--/ profile -->
+       </div>
+	  </div>
+	 </section>
 
      <!-- ==============================================
 	 Scripts
@@ -108,9 +117,11 @@
             },
             success: function(data) {
                 if (data.follow) {
-                    btn.text('دنبال نکردن ');
+                    btn.text('آنفالو');
+                    btn.removeClass('kafe-btn-mint').addClass('kafe-btn-danger');
                 } else {
-                    btn.text('دنبال کردن');
+                    btn.text('فالو');
+                    btn.removeClass('kafe-btn-danger').addClass('kafe-btn-mint');
                 }
             }
         });

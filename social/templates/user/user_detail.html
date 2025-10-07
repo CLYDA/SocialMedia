@@ -110,11 +110,7 @@
 						<div class="col-lg-3">
                         <a class="kafe-btn kafe-btn-default-mint"  href="{% url 'chat:chat_view' user.username %}"> چت </a>
                             {% if request.user == user %}
-                                    {% if request.user in user.followers.all%}
-                                        <button class="kafe-btn kafe-btn-default-mint" > آنفالو </button>ton>
-                                    {% else %}
-                                        <button class="kafe-btn kafe-btn-default-mint" > فالو </button>
-                                    {% endif %}
+                                    <button class="kafe-btn kafe-btn-default-mint" > خودت </button>
                             {% else %}
                                     {% if request.user in user.followers.all%}
                                         <button class="kafe-btn kafe-btn-danger" id="follow-button"> آنفالو </button>
