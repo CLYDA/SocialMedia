@@ -17,7 +17,8 @@ from django.contrib import messages
 @login_required
 def following_list(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
-    following = user.following.all()
+    # following = user.following.all()
+    following = user.get_followings()
     return render(request, 'user/following_list.html', {
         'user': user,
         'following': following,
