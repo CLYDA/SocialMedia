@@ -13,6 +13,16 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
 
+@login_required
+def followers_list(request, username):
+    user = get_object_or_404(User, username=username, is_active=True)
+    # followers = user.followers.all()
+    followers = user.get_followers()
+    return render(request, 'user/followers_list.html', {
+        'user': user,
+        'followers': followers,
+    })
+
 
 @login_required
 def following_list(request, username):

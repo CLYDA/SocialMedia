@@ -41,5 +41,7 @@ urlpatterns = [
 	path('message', views.message, name="message"),
 
     path('users/<username>/following_list/', views.following_list, name='following_list'),
+
+    path('users/<username>/follower/', views.followers_list, name='followers_list'),
 ]
 
