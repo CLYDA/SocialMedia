@@ -1,0 +1,27 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}فالوور ها{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="followers-box full-width">
+                <h3 style="text-align: center;">فالوور ها</h3>
+                <div class="followers-list">
+                    {% for u in followers %}
+                        <div class="follower-item" style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <img src="{% if u.photo %}{{ u.photo.url }}{% else %}{% static 'images/profile/Avatar.png' %}{% endif %}"
+                                 width="40" height="40" style="border-radius:50%; margin-left: 10px;">
+                            <a href="{% url 'social:user_detail' u.username %}" style="color: #222; text-decoration: none; font-weight: bold;">
+                                {{ u.get_full_name }} <span style="color:gray; font-weight: normal;">@{{ u.username }}</span>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <div>هیچ فالووری وجود ندارد.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
