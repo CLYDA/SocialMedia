@@ -70,7 +70,7 @@
                                                         alt="Image" />
                                                 </div>
                                                 <div class="comment-text">
-                                                    <strong><a href="#">{{ comment.name }}</a></strong>
+                                                    <strong><a href="{% url 'social:user_detail' comment.user.username %}">{{ comment.user.username }}</a></strong>
                                                     <p class="">{{ comment.body }}</p> <span class="date sub-text"> در {{ comment.created }} </span>
                                                 </div>
                                             </li>
