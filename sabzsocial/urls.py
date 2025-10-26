@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('social.urls', namespace='social')),
     path('chat/', include('chat.urls', namespace='chat')),
     path('__debug__/', include("debug_toolbar.urls")),
+    path('api/', include('api.urls', namespace='api')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
