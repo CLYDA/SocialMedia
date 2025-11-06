@@ -1,9 +1,15 @@
 from rest_framework import serializers
-from social.models import Post
+from social.models import Post , User
  
 
-class PostSerializer(serializers.ModelSerializer):
+class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
+        model = User
+        fields = [ 'username', 'email']  
+
+
+class PostSerializer(serializers.ModelSerializer):
+    users = PostUserSerializer(source='author', read_only=True)
+    class Meta: 
         model = Post
-        fields = ['id', 'author', 'description', 'likes','created']
-    
+        fields = ['id', 'users', 'description', 'likes', 'created']
